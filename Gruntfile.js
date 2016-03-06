@@ -1,22 +1,46 @@
-//If trying to use this gruntfile, don't forget to first npm install all the plug-ins listed in the section that looks like:
-// [[  grunt.loadNpmTasks('grunt-contrib-uglify');  ]]
-
+//firstly npm install all the plugins
 
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    concat: {
 
+    watch: {
+      options: {
+        livereload: true,
+        livereloadOnError: false
+      },
+      scripts: {
+        files: [
+          'client/**/*.js',
+          'client/lib/**/*.js'
+        ],
+        tasks: ['concat']
+      },
+      css: {
+        files: 'client/**/*.css',
+        tasks: ['concat_css']
+      }
+    },
+
+    concat: {
       options: {
         separator: ';'
       },
       dist: {
-        src: ['public/client/**/*.js'],
-        dest: 'public/dist/<%= pkg.name %>.js'
+        src: ['client/**/*.js'],
+        dest: 'distr/main.js'
       }
-          },
+    },
 
+    concat_css: {
+      options: {},
+      all: {
+        src: ["client/**/*.css"],
+        dest: "distr/styles.css"
+      }
+    },
+
+// todo: haven't considered usefulness of that tasks yet
     mochaTest: {
       test: {
         options: {
@@ -33,7 +57,6 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
@@ -42,22 +65,20 @@ module.exports = function(grunt) {
           'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
         }
       }
-          },
+    },
 
     eslint: {
       target: [
-
         'Gruntfile.js',
         'app/**/*.js',
         'public/**/*.js',
         'lib/**/*.js',
         './*.js',
         'spec/**/*.js'
-              ]
+      ]
     },
 
     cssmin: {
-
       options: {
         keepSpecialComments: 0
       },
@@ -66,41 +87,26 @@ module.exports = function(grunt) {
           'public/dist/style.min.css': 'public/style.css'
         }
       }
-          },
-
-    watch: {
-      scripts: {
-        files: [
-          'public/client/**/*.js',
-          'public/lib/**/*.js',
-        ],
-        tasks: [
-          'concat',
-          'uglify'
-        ]
-      },
-      css: {
-        files: 'public/*.css',
-        tasks: ['cssmin']
-      }
     },
 
     shell: {
       prodServer: {
-
         command: 'git push live master',
         options: {
           stdout: true,
           stderr: true,
           failOnError: true
         }
-              }
-    },
+      }
+    }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // watch task and its dependent tasks
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-concat-css');
+
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
@@ -120,12 +126,10 @@ module.exports = function(grunt) {
     grunt.task.run([ 'watch' ]);
   });
 
-
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
-
       grunt.task.run([ 'shell:prodServer' ]);
-          }
+    }
     grunt.task.run([ 'server-dev' ]);
   });
 
@@ -134,33 +138,27 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-
     'eslint',
-        'mochaTest'
+    'mochaTest'
   ]);
 
   grunt.registerTask('build', [
-
     'concat',
     'uglify',
     'cssmin'
-      ]);
+  ]);
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
-
       grunt.task.run([ 'shell:prodServer' ]);
-          } else {
+    } else {
       grunt.task.run([ 'server-dev' ]);
     }
   });
 
   grunt.registerTask('deploy', [
-
     'test',
     'build',
     'upload'
-      ]);
-
-
+  ]);
 };
