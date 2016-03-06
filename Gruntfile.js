@@ -10,15 +10,15 @@ module.exports = function(grunt) {
         livereloadOnError: false
       },
       scripts: {
-        files: [
-          'client/**/*.js',
-          'client/lib/**/*.js'
-        ],
-        tasks: ['concat']
+        files: 'client/application/**/*.js',
+        tasks: 'concat'
       },
       css: {
-        files: 'client/**/*.css',
-        tasks: ['concat_css']
+        files: 'client/application/**/*.css',
+        tasks: 'concat_css'
+      },
+      html: {
+        files: 'client/application/**/*.html'
       }
     },
 
@@ -41,15 +41,6 @@ module.exports = function(grunt) {
     },
 
 // todo: haven't considered usefulness of that tasks yet
-    mochaTest: {
-      test: {
-        options: {
-          reporter: 'spec'
-        },
-        src: ['test/**/*.js']
-      }
-    },
-
     nodemon: {
       dev: {
         script: 'server/server.js'
@@ -109,9 +100,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-nodemon');
+  //grunt.loadNpmTasks('grunt-shell');
+  //grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -138,8 +128,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'eslint',
-    'mochaTest'
+    'eslint'
   ]);
 
   grunt.registerTask('build', [
