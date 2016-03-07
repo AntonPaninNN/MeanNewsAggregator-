@@ -1,153 +1,140 @@
 //firstly npm install all the plugins
 
-module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+module.exports = function (grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
-    watch: {
-      options: {
-        livereload: true,
-        livereloadOnError: false
-      },
-      scripts: {
-        files: 'client/application/**/*.js',
-        tasks: 'concat'
-      },
-      css: {
-        files: 'client/application/**/*.css',
-        tasks: 'concat_css'
-      },
-      html: {
-        files: 'client/application/**/*.html'
-      }
-    },
+        'http-server': {
+            'dev': {
+                // the server root directory
+                root: "./",
+                port: 8282,
+                host: "127.0.0.1",
+                showDir: true,
+                autoIndex: true,
+                // server default file extension
+                ext: "html",
+                // run in parallel with other tasks
+                runInBackground: true,
+                // tell grunt task to open the browser
+                openBrowser: false
+            }
+        },
 
-    concat: {
-      options: {
-        separator: ';'
-      },
-      dist: {
-        src: ['client/**/*.js'],
-        dest: 'distr/main.js'
-      }
-    },
+        watch: {
+            options: {
+                livereload: true,
+                livereloadOnError: false
+            },
+            scripts: {
+                files: 'client/application/**/*.js',
+                tasks: 'concat'
+            },
+            css: {
+                files: 'client/application/**/*.css',
+                tasks: 'concat_css'
+            },
+            html: {
+                files: 'client/application/**/*.html'
+            }
+        },
 
-    concat_css: {
-      options: {},
-      all: {
-        src: ["client/**/*.css"],
-        dest: "distr/styles.css"
-      }
-    },
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: [
+                    'client/lib/angular/angular.js',
+                    'client/lib/angular-route/angular-route.js',
+                    'client/application/**/*.js'
+                ],
+                dest: 'distr/main.js'
+            }
+        },
+
+        concat_css: {
+            options: {},
+            all: {
+                src: ["client/**/*.css"],
+                dest: "distr/styles.css"
+            }
+        },
 
 // todo: haven't considered usefulness of that tasks yet
-    nodemon: {
-      dev: {
-        script: 'server/server.js'
-      }
-    },
 
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-      },
-      dist: {
-        files: {
-          'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        uglify: {
+            options: {
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+            },
+            dist: {
+                files: {
+                    'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+                }
+            }
+        },
+
+        eslint: {
+            target: [
+                'Gruntfile.js',
+                'app/**/*.js',
+                'public/**/*.js',
+                'lib/**/*.js',
+                './*.js',
+                'spec/**/*.js'
+            ]
+        },
+
+        cssmin: {
+            options: {
+                keepSpecialComments: 0
+            },
+            dist: {
+                files: {
+                    'public/dist/style.min.css': 'public/style.css'
+                }
+            }
         }
-      }
-    },
-
-    eslint: {
-      target: [
-        'Gruntfile.js',
-        'app/**/*.js',
-        'public/**/*.js',
-        'lib/**/*.js',
-        './*.js',
-        'spec/**/*.js'
-      ]
-    },
-
-    cssmin: {
-      options: {
-        keepSpecialComments: 0
-      },
-      dist: {
-        files: {
-          'public/dist/style.min.css': 'public/style.css'
-        }
-      }
-    },
-
-    shell: {
-      prodServer: {
-        command: 'git push live master',
-        options: {
-          stdout: true,
-          stderr: true,
-          failOnError: true
-        }
-      }
-    }
-  });
-
-  // watch task and its dependent tasks
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-concat-css');
-
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-eslint');
-  //grunt.loadNpmTasks('grunt-shell');
-  //grunt.loadNpmTasks('grunt-nodemon');
-
-  grunt.registerTask('server-dev', function (target) {
-    // Running nodejs in a different process and displaying output on the main console
-    var nodemon = grunt.util.spawn({
-      cmd: 'grunt',
-      grunt: true,
-      args: 'nodemon'
     });
-    nodemon.stdout.pipe(process.stdout);
-    nodemon.stderr.pipe(process.stderr);
 
-    grunt.task.run([ 'watch' ]);
-  });
+    ///////////////////////////////////////////
+    // All used Grunt plugins
+    ///////////////////////////////////////////
 
-  grunt.registerTask('upload', function(n) {
-    if (grunt.option('prod')) {
-      grunt.task.run([ 'shell:prodServer' ]);
-    }
-    grunt.task.run([ 'server-dev' ]);
-  });
+    // watch task (served by http-server) and its dependent tasks, for frontend development
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-concat-css');
+    grunt.loadNpmTasks('grunt-http-server');
 
-  ////////////////////////////////////////////////////
-  // Main grunt tasks
-  ////////////////////////////////////////////////////
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-eslint');
+    //grunt.loadNpmTasks('grunt-nodemon');
 
-  grunt.registerTask('test', [
-    'eslint'
-  ]);
+    ///////////////////////////////////////////
+    // Main Grunt tasks
+    ///////////////////////////////////////////
 
-  grunt.registerTask('build', [
-    'concat',
-    'uglify',
-    'cssmin'
-  ]);
+    grunt.registerTask('frontDev', [
+        'http-server',
+        'watch'
+    ]);
 
-  grunt.registerTask('upload', function(n) {
-    if (grunt.option('prod')) {
-      grunt.task.run([ 'shell:prodServer' ]);
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-    }
-  });
+    grunt.registerTask('test', [
+        'eslint',
+        // todo: add karma tests
+        'karma-test'
+    ]);
 
-  grunt.registerTask('deploy', [
-    'test',
-    'build',
-    'upload'
-  ]);
+    grunt.registerTask('build', [
+        'concat',
+        'uglify',
+        'cssmin'
+    ]);
+
+    grunt.registerTask('prepare-to-commit', [
+        'test',
+        'build'
+    ]);
 };
