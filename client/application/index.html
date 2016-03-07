@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>News Aggregator</title>
-    <link rel="stylesheet" type="text/css" href="distr/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../distr/styles.css" />
   </head>
   <body>
+  <script type="application/javascript" src="../../distr/main.js"></script>
+    <div ng-controller="MainCtrl as mainCtrl">
+        {{mainCtrl.test}}
+    </div>
+    <p>The sum of 5+10 is: {{5 + 10}}</p>
 
-    <script type="application/javascript" src="distr/main.js"></script>
     <!-- for live reload functionality purpose -->
     <script src="//localhost:35729/livereload.js"></script>
   </body>
