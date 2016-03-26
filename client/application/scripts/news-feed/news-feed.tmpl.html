@@ -1,0 +1,18 @@
+<div class="mna-news-feed">
+    <mna-preloader is-data-loading="{{feedCtrl.isDataLoading}}"></mna-preloader>
+    <div ng-repeat="news in feedCtrl.allNews">
+        <div>
+            <a ng-href="{{news.site.link}}">
+                <img ng-src="{{news.site.favicon}}" alt="{{news.site.name}}">
+                {{news.site.name}}
+            </a>
+        </div>
+        <div>
+            <h4>{{news.news.title}}</h4>
+            <p>Publication date: {{news.news.publication_date | date:'medium'}}</p>
+            <div ng-repeat="textLines in news.news.text">
+                <p>{{textLines}}</p>
+            </div>
+        </div>
+    </div>
+</div>
