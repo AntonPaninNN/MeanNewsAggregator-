@@ -45,6 +45,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: [
+                    'client/lib/jQuery/dist/jquery.js',
                     'client/lib/angular/angular.js',
                     'client/lib/angular-route/angular-route.js',
                     'client/application/**/*.js'
