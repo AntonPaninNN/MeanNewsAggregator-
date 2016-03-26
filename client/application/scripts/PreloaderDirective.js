@@ -12,6 +12,7 @@ angular
             link: function link(scope, element, attrs, controller, transcludeFn) {
                 scope.$watch("isDataLoading", function(newValue){
                     if (newValue === "true"){
+                        //todo try not to use jquery
                         $(element[0]).show();
                     } else {
                         $(element[0]).hide();

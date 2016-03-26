@@ -30,22 +30,53 @@
             <div ng-controller="RegistrationCtrl as regCtrl">
                 <h3>Register</h3>
                 <form ng-submit="regCtrl.register()" name="registrationForm">
+                    <span>All fields are required</span>
+                    <span ng-show="registrationForm.username.$error.required &&
+                                   registrationForm.username.$dirty">
+                        Username shouldn't be empty
+                    </span>
                     <input type="text"
+                           name="username"
                            ng-model="regCtrl.newUser.username"
                            placeholder="Username"
                            ng-minlength="4"
                            required>
+                    <span ng-show="registrationForm.email.$error.required &&
+                                   registrationForm.email.$dirty">
+                        Email shouldn't be empty
+                    </span>
+                    <span ng-show="registrationForm.$error.email &&
+                                   registrationForm.email.$dirty">
+                        Invalid email pattern
+                    </span>
                     <input type="email"
+                           name="email"
                            ng-model="regCtrl.newUser.email"
                            placeholder="Email"
                            required>
+                    <span ng-show="registrationForm.password.$error.required &&
+                                   registrationForm.password.$dirty">
+                        Password shouldn't be empty
+                    </span>
+                    <span ng-show="registrationForm.password.$error.minlength &&
+                                   registrationForm.password.$dirty">
+                        Password minimum length is 6
+                    </span>
                     <input type="password"
+                           name="password"
                            ng-model="regCtrl.newUser.password"
                            placeholder="Password"
+                           ng-minlength="6"
                            required>
+                    <!--todo add password matching support later-->
+                    <!--<span ng-show="registrationForm.passwordRepeated.$error">
+                        Passwords should match
+                    </span>-->
                     <input type="password"
+                           name="passwordRepeated"
                            ng-model="regCtrl.newUser.repeatedPassword"
                            placeholder="Repeat password"
+                           ng-minlength="6"
                            required>
                     <input type="submit"
                            value="Submit"
