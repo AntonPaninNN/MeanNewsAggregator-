@@ -1,0 +1,60 @@
+<div>
+    <div ng-switch on="authCtrl.viewType">
+        <div ng-switch-when="login">
+            <div ng-controller="LogInCtrl as loginCtrl">
+                <h3>Login</h3>
+                <form ng-submit="loginCtrl.login()" name="loginForm">
+                    <span ng-show="loginForm.username.$error.required && loginForm.username.$dirty">
+                        Username shouldn't be empty
+                    </span>
+                    <input type="text"
+                           name="username"
+                           ng-model="loginCtrl.user.username"
+                           placeholder="Username or email"
+                           required>
+                    <span ng-show="loginForm.password.$error.required && loginForm.password.$dirty">
+                        Password shouldn't be empty
+                    </span>
+                    <input type="password"
+                           name="password"
+                           ng-model="loginCtrl.user.password"
+                           placeholder="Password"
+                           required>
+                    <input type="submit"
+                           value="Submit"
+                           ng-disabled="loginForm.$invalid">
+                </form>
+            </div>
+        </div>
+        <div ng-switch-when="register">
+            <div ng-controller="RegistrationCtrl as regCtrl">
+                <h3>Register</h3>
+                <form ng-submit="regCtrl.register()" name="registrationForm">
+                    <input type="text"
+                           ng-model="regCtrl.newUser.username"
+                           placeholder="Username"
+                           ng-minlength="4"
+                           required>
+                    <input type="email"
+                           ng-model="regCtrl.newUser.email"
+                           placeholder="Email"
+                           required>
+                    <input type="password"
+                           ng-model="regCtrl.newUser.password"
+                           placeholder="Password"
+                           required>
+                    <input type="password"
+                           ng-model="regCtrl.newUser.repeatedPassword"
+                           placeholder="Repeat password"
+                           required>
+                    <input type="submit"
+                           value="Submit"
+                           ng-disabled="registrationForm.$invalid">
+                </form>
+            </div>
+        </div>
+
+        <button ng-click="authCtrl.switchView('login')">Login</button>
+        <button ng-click="authCtrl.switchView('register')">Register</button>
+    </div>
+</div>
