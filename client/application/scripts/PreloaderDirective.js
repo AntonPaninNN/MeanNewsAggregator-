@@ -3,7 +3,7 @@ angular
     .directive('mnaPreloader', ['$log', function($log) {
         return {
             restrict: 'E',
-            template: '<img src="img/715.gif"/>',
+            template: '<img src="img/preloader.gif"/>',
             //transclude: true,
             replace: true,
             scope: {
