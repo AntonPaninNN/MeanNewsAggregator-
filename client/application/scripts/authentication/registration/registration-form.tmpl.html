@@ -1,0 +1,69 @@
+<div class="mna-registration">
+    <h3>Register</h3>
+    <form ng-submit="regCtrl.register()" name="registrationForm" class="pure-form pure-form-aligned">
+        <fieldset>
+            <div class="mna-register-username pure-control-group">
+                <span ng-show="registrationForm.username.$error.minlength && registrationForm.username.$dirty">
+                    Password minimum length is 4
+                </span>
+                <label for="mna-register-username">Username</label>
+                <input type="text"
+                       name="username"
+                       ng-model="regCtrl.newUser.username"
+                       placeholder="Username"
+                       id="mna-register-username"
+                       ng-minlength="4"
+                       required>
+            </div>
+            <div class="mna-register-email pure-control-group ">
+                <span class="mna-register-email-"
+                      ng-show="registrationForm.$error.email && registrationForm.email.$dirty">
+                    invalid email pattern
+                </span>
+                <label for="mna-register-email">Email</label>
+                <input type="email"
+                       name="email"
+                       ng-model="regCtrl.newUser.email"
+                       placeholder="Email"
+                       id="mna-register-email"
+                       required>
+            </div>
+            <div class="mna-register-password pure-control-group">
+                <span ng-show="registrationForm.password.$error.minlength && registrationForm.password.$dirty">
+                    Password minimum length is 6
+                </span>
+                <label for="mna-register-password">Password</label>
+                <input type="password"
+                       name="password"
+                       ng-model="regCtrl.newUser.password"
+                       placeholder="Password"
+                       id="mna-register-password"
+                       ng-minlength="6"
+                       required>
+            </div>
+            <div class="pure-control-group">
+                <!--todo add password matching support later-->
+                <!--<span ng-show="registrationForm.passwordRepeated.$error">
+                    Passwords should match
+                </span>-->
+                <label for="mna-register-repeat-password">Repeat password</label>
+                <input type="password"
+                       name="passwordRepeated"
+                       ng-model="regCtrl.newUser.repeatedPassword"
+                       placeholder="Repeat password"
+                       id="mna-register-repeat-password"
+                       ng-minlength="6"
+                       required>
+            </div>
+            <div class="pure-controls">
+                <input type="submit"
+                       value="Submit"
+                       class="pure-button"
+                       ng-disabled="registrationForm.$invalid">
+                <input type="reset"
+                       value="Reset"
+                       class="pure-button" ng-click="registrationForm.$setPristine();">
+            </div>
+        </fieldset>
+    </form>
+</div>
