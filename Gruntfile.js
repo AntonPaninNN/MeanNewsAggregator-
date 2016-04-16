@@ -57,7 +57,12 @@ module.exports = function (grunt) {
         concat_css: {
             options: {},
             all: {
-                src: ["client/**/*.css"],
+                src: [
+                    "client/lib/pure/pure-min.css",
+                    "client/lib/pure/grids-responsive-min.css",
+                    /* "client/lib/font-awesome/css/font-awesome.min.css", */
+                    "client/application/**/*.css"
+                ],
                 dest: "distr/styles.css"
             }
         },
