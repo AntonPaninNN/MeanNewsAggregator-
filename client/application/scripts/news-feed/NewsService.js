@@ -1,5 +1,5 @@
 /**
- * Created by hartex on 12.03.16.
+ * Created by hartex
  */
 angular
     .module("news-aggregator-app")
@@ -17,11 +17,17 @@ angular
                     };
                     return $http(req)
                         .then(function (successResp) {
-                            //$log.log(successResp.data.all_news);
                             return successResp.data.all_news;
                         }, function (errorResp) {
                             $log.error("Error while fetching news " + errorResp);
                         });
+                },
+                //todo getting WS connection and subscribing for a news data
+                getWS: function () {
+                    /*var socket = io('http://localhost');
+                    socket.on('news', function (data) {
+                        console.log(data);
+                    });*/
                 }
             }
         }]);

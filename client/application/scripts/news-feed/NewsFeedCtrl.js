@@ -1,5 +1,5 @@
 /**
- * Created by hartex on 12.03.16.
+ * Created by hartex
  */
 angular
     .module("news-aggregator-app")
