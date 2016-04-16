@@ -1,0 +1,35 @@
+<div class="mna-login">
+    <h3>Login</h3>
+    <form ng-submit="loginCtrl.login()" name="loginForm" class="pure-form pure-form-aligned mna-login-form">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="mna-login-username">Username</label>
+                <input type="text"
+                       name="username"
+                       id="mna-login-username"
+                       ng-model="loginCtrl.user.username"
+                       placeholder="Username or email"
+                       required>
+            </div>
+            <div class="pure-control-group">
+                <label for="mna-login-password">Password</label>
+                <input type="password"
+                       name="password"
+                       id="mna-login-password"
+                       ng-model="loginCtrl.user.password"
+                       placeholder="Password"
+                       required>
+            </div>
+            <div class="pure-controls">
+                <input type="submit"
+                       value="Submit"
+                       class="pure-button"
+                       ng-disabled="loginForm.$invalid">
+                <input type="reset"
+                       value="Reset"
+                       class="pure-button"
+                       ng-click="loginForm.$setPristine();">
+            </div>
+        </fieldset>
+    </form>
+</div>
