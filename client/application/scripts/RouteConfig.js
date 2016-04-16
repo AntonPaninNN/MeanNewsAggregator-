@@ -1,5 +1,5 @@
 /**
- * Created by hartex on 26.03.16.
+ * Created by hartex
  */
 angular
     .module("news-aggregator-app")
@@ -15,6 +15,16 @@ angular
                     templateUrl: 'scripts/authentication/auth.tmpl.html',
                     controller: 'AuthCtrl',
                     controllerAs: 'authCtrl'
+                })
+                .when('/settings', {
+                    templateUrl: 'scripts/settings/user-settings.tmpl.html',
+                    controller: 'UserSettingsCtrl',
+                    controllerAs: 'settingsCtrl'
+                })
+                .when('/search-results', {
+                    templateUrl: 'scripts/search/search-results.tmpl.html',
+                    controller: 'SearchResultsCtrl',
+                    controllerAs: 'searchCtrl'
                 })
                 .otherwise({
                     redirectTo: '/news-feed'
