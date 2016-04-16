@@ -1,4 +1,53 @@
-.mna-newsfeed{
+@font-face {
+    font-family: Arvo;
+    src: url(../client/application/fonts/Arvo-Regular.ttf);
+}
+
+/* for PureCss compatibility */
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: Arvo, sans-serif;
+}
+
+.mna-auth h1 {
+    text-align: center;
+}
+
+.mna-login h3, .mna-registration h3 {
+    text-align: center;
+}
+
+.mna-auth-switch-controls {
+    text-align: center;
+}
+
+.mna-auth-switch-controls button {
+    text-align: center;
+    width: 49%;
+}
+
+.mna-login-form fieldset {
+    margin: auto;
+}
+
+.mna-register-email span,
+.mna-register-password span,
+.mna-register-username span {
+    font-size: 0.8rem;
+    text-align: right;
+    display: block;
+    margin-bottom: 6px;
+    margin-right: 10%;
+    color: #c34d34;
+}
+
+.mna-registration label:after {
+    content: "*";
+    color: #c34d34;
+    margin-left: 4px;
+}
+
+.mna-newsfeed {
     width: 780px;
     margin: auto;
     margin-top: 20px;
