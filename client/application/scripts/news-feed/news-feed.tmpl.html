@@ -1,19 +1,32 @@
-<header-bar></header-bar>
-<div class="mna-newsfeed">
-    <mna-preloader is-data-loading="{{feedCtrl.isDataLoading}}"></mna-preloader>
-    <div ng-repeat="news in feedCtrl.allNews">
-        <div>
-            <a ng-href="{{news.site.link}}">
-                <img ng-src="{{news.site.favicon}}" alt="{{news.site.name}}">
-                {{news.site.name}}
-            </a>
-        </div>
-        <div>
-            <h4>{{news.news.title}}</h4>
-            <p>Publication date: {{news.news.publication_date | date:'medium'}}</p>
-            <div ng-repeat="textLines in news.news.text">
-                <p>{{textLines}}</p>
+<div>
+    <mna-menu></mna-menu>
+    <div class="pure-g mna-newsfeed">
+        <div class="pure-u-6-24"></div>
+        <div class="pure-u-14-24">
+            <a id="mna-top" href="#"></a>
+            <p class="mna-section-header">news feed</p>
+            <mna-preloader is-data-loading="{{feedCtrl.isDataLoading}}"></mna-preloader>
+            <div ng-repeat="news in feedCtrl.allNews">
+                <div class="mna-newsfeed-news-title">
+                    <a ng-href="{{news.site.link}}" class="mna-newsfeed-site">
+                        <img ng-src="{{news.site.favicon}}" alt="{{news.site.name}}">
+                        {{news.site.name}}
+                    </a>
+                    <p class="mna-newsfeed-pub-date">
+                        Publication date: {{news.news.publication_date | date:'dd.MM.yyyy HH:mm'}}
+                    </p>
+                </div>
+                <div>
+                    <h3>{{news.news.title}}</h3>
+                    <div ng-repeat="textLines in news.news.text">
+                        <p>{{textLines}}</p>
+                    </div>
+                </div>
+                <hr>
             </div>
+        </div>
+        <div class="pure-u-4-24">
+            <mna-scroll-to-top></mna-scroll-to-top>
         </div>
     </div>
 </div>
