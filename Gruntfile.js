@@ -27,15 +27,28 @@ module.exports = function (grunt) {
                 livereloadOnError: false
             },
             scripts: {
-                files: 'client/application/**/*.js',
+                files: 'client/application/src/**/*.js',
                 tasks: 'concat'
             },
             css: {
-                files: 'client/application/**/*.css',
-                tasks: 'concat_css'
+                files: 'client/application/src/**/*.scss',
+                tasks: 'sass'
             },
             html: {
-                files: 'client/application/**/*.html'
+                files: 'client/application/src/**/*.html'
+            }
+        },
+
+        sass: {
+            options: {
+                sourceMap: true,
+                outputStyle: 'expanded',
+                precision: 5
+            },
+            dist: {
+                files: {
+                    'main.css': 'main.scss'
+                }
             }
         },
 
@@ -112,6 +125,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-concat-css');
     grunt.loadNpmTasks('grunt-http-server');
+    grunt.loadNpmTasks('grunt-sass');
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');

@@ -6,7 +6,7 @@ angular
     .directive('mnaMenu', ['$log', function ($log) {
         return {
             restrict: 'E',
-            templateUrl: 'scripts/menu/menu.tmpl.html',
+            templateUrl: 'src/menu/menu.tmpl.html',
             scope: {},
             link: function link(scope, element, attrs, controller, transcludeFn) {
 

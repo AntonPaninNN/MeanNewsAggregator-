@@ -9,7 +9,7 @@ angular
                 getAllNews: function () {
                     var req = {
                         method: 'GET',
-                        url: 'scripts/news-sample.json',
+                        url: 'src/news-sample.json',
                         transformResponse: function(data, headers){
                             //todo here comes data transformation, especially news text transformation
                             return JSON.parse(data);

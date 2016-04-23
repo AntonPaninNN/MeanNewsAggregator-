@@ -6,7 +6,7 @@ angular
     .directive('mnaRegistrationForm', ['$log', function ($log) {
         return {
             restrict: 'E',
-            templateUrl: 'scripts/authentication/registration/registration-form.tmpl.html',
+            templateUrl: 'src/authentication/registration/registration-form.tmpl.html',
             replace: true
         };
     }]);

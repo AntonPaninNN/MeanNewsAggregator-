@@ -9,7 +9,7 @@ angular
                 getCurrentUserData: function(){
                     var req = {
                         method: 'GET',
-                        url: 'scripts/user-data-sample.json'
+                        url: 'src/user-data-sample.json'
                     };
                     return $http(req)
                         .then(function (successResp) {
