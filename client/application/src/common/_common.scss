@@ -1,0 +1,24 @@
+@font-face {
+  font-family: Arvo;
+  src: url(../client/application/fonts/Arvo-Regular.ttf);
+}
+
+@font-face {
+  font-family: Bevan;
+  src: url(../client/application/fonts/Bevan.ttf);
+}
+
+/* for PureCss compatibility */
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+  font-family: Arvo, sans-serif;
+}
+
+.mna-section-header {
+  font-family: Bevan, serif;
+  font-weight: 900;
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: right;
+}

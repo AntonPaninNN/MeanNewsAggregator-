@@ -1,0 +1,20 @@
+.mna-registration h3 {
+  text-align: center;
+}
+
+.mna-register-email span,
+.mna-register-password span,
+.mna-register-username span {
+  font-size: 0.8rem;
+  text-align: right;
+  display: block;
+  margin-bottom: 6px;
+  margin-right: 10%;
+  color: #c34d34;
+}
+
+.mna-registration label:after {
+  content: "*";
+  color: #c34d34;
+  margin-left: 4px;
+}

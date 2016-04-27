@@ -30,9 +30,13 @@ module.exports = function (grunt) {
                 files: 'client/application/src/**/*.js',
                 tasks: 'concat'
             },
-            css: {
-                files: 'client/application/src/**/*.scss',
-                tasks: 'sass'
+            sass: {
+                files: ['client/application/**/*.scss'],
+                tasks: ['sass', 'concat_css']
+            },
+            livereload: {
+                options: { livereload: true },
+                files: ['distr/final/**/*']
             },
             html: {
                 files: 'client/application/src/**/*.html'
@@ -41,13 +45,13 @@ module.exports = function (grunt) {
 
         sass: {
             options: {
-                sourceMap: true,
                 outputStyle: 'expanded',
+                sourceMap: true,
                 precision: 5
             },
             dist: {
                 files: {
-                    'main.css': 'main.scss'
+                    'distr/custom/main.css': 'client/application/styles/main.scss'
                 }
             }
         },
@@ -61,7 +65,7 @@ module.exports = function (grunt) {
                     'client/lib/jQuery/dist/jquery.js',
                     'client/lib/angular/angular.js',
                     'client/lib/angular-route/angular-route.js',
-                    'client/application/**/*.js'
+                    'client/application/src/**/*.js'
                 ],
                 dest: 'distr/main.js'
             }
@@ -74,13 +78,13 @@ module.exports = function (grunt) {
                     "client/lib/pure/pure-min.css",
                     "client/lib/pure/grids-responsive-min.css",
                     /* "client/lib/font-awesome/css/font-awesome.min.css", */
-                    "client/application/**/*.css"
+                    "distr/custom/main.css"
                 ],
-                dest: "distr/styles.css"
+                dest: "distr/final/main.css"
             }
         },
 
-// todo: haven't considered usefulness of that tasks yet
+// todo: i haven't considered usefulness of that tasks yet
 
         uglify: {
             options: {
