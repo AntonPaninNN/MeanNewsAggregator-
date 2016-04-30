@@ -43,6 +43,21 @@ module.exports = function (grunt) {
             }
         },
 
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: [
+                    'client/lib/jQuery/dist/jquery.js',
+                    'client/lib/angular/angular.js',
+                    'client/lib/angular-route/angular-route.js',
+                    'client/application/src/**/*.js'
+                ],
+                dest: 'distr/final/main.js'
+            }
+        },
+
         sass: {
             options: {
                 outputStyle: 'expanded',
@@ -56,23 +71,7 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: [
-                    'client/lib/jQuery/dist/jquery.js',
-                    'client/lib/angular/angular.js',
-                    'client/lib/angular-route/angular-route.js',
-                    'client/application/src/**/*.js'
-                ],
-                dest: 'distr/main.js'
-            }
-        },
-
         concat_css: {
-            options: {},
             all: {
                 src: [
                     "client/lib/pure/pure-min.css",
@@ -80,7 +79,18 @@ module.exports = function (grunt) {
                     /* "client/lib/font-awesome/css/font-awesome.min.css", */
                     "distr/custom/main.css"
                 ],
-                dest: "distr/final/main.css"
+                dest: "distr/custom/main_concated.css"
+            }
+        },
+
+        cssmin: {
+            options: {
+                shorthandCompacting: false
+            },
+            target: {
+                files: {
+                    'distr/final/main.css': 'distr/custom/main_concated.css'
+                }
             }
         },
 
@@ -106,17 +116,6 @@ module.exports = function (grunt) {
                 './*.js',
                 'spec/**/*.js'
             ]
-        },
-
-        cssmin: {
-            options: {
-                keepSpecialComments: 0
-            },
-            dist: {
-                files: {
-                    'public/dist/style.min.css': 'public/style.css'
-                }
-            }
         }
     });
 
@@ -127,14 +126,13 @@ module.exports = function (grunt) {
     // watch task (served by http-server) and its dependent tasks, for frontend development
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-concat-css');
     grunt.loadNpmTasks('grunt-http-server');
     grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-concat-css');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-eslint');
-    //grunt.loadNpmTasks('grunt-nodemon');
 
     ///////////////////////////////////////////
     // Main Grunt tasks
@@ -142,6 +140,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('frontDev', [
         'http-server',
+        'concat',
+        'sass',
+        'concat_css',
+        'cssmin',
         'watch'
     ]);
 
