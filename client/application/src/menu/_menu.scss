@@ -1,3 +1,5 @@
+$mna-default-border: 1px solid black;
+
 .mna-menu {
   width: 210px;
   position: fixed;
@@ -8,78 +10,78 @@
   background: #BCBABE;;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-}
 
-.mna-menu-heading {
-  text-align: center;
-  font-size: 16px;
-  background: #1995AD;
-  padding: 20px 16px;
-  color: #F1F1F2;
-}
+  &-heading {
+    text-align: center;
+    font-size: 16px;
+    background: #1995AD;
+    padding: 20px 16px;
+    color: #F1F1F2;
+  }
 
-.mna-menu-userpic-container {
-  border: 1px solid black;
-  border-radius: 20px;
-  width: 178px;
-  height: 178px;
-  overflow: hidden;
-  margin: 20px auto auto;
-}
+  &-userpic-container {
+    border: $mna-default-border;
+    @include mna-border-radius(20px);
+    width: 178px;
+    height: 178px;
+    overflow: hidden;
+    margin: 20px auto auto;
 
-.mna-menu-userpic-container a {
-  display: block;
-  border: 1px solid black;
-  border-radius: 15px;
-  width: 160px;
-  height: 160px;
-  overflow: hidden;
-  margin: 8px;
-}
+    a {
+      display: block;
+      border: $mna-default-border;
+      @include mna-border-radius(15px);
+      width: 160px;
+      height: 160px;
+      overflow: hidden;
+      margin: 8px;
 
-.mna-menu-userpic-container a img {
-  height: 100%;
-  width: 100%;
-}
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
 
-.mna-menu-ctrls{
-  margin-top: 90px;
-}
+  &-ctrls {
+    margin-top: 90px;
 
-.mna-menu-ctrls li{
-  margin-top: 12px;
-}
+    li {
+      margin-top: 12px;
+    }
+  }
 
-.mna-menu-user-credentials {
-  height: 50px;
-  margin: 10px auto auto 15px;
-  font-weight: bold;
-  font-size: 18px;
-}
+  &-user-credentials {
+    height: 50px;
+    font:{
+      weight: bold;
+      size: 18px;
+    }
+    margin: 15px auto auto 15px;
 
-.mna-menu-item-search {
-  padding: 8px 16px;
-}
+    span {
+      display: block;
+      margin-bottom: 7px;
+    }
+  }
 
-.mna-menu-item-search input{
-  width: 136px;
-  height: 30px;
-  padding: 1px 1px 1px 5px;
-  border: none;
-}
+  &-item {
+    &-search {
+      padding: 8px 16px;
 
-.mna-menu-item-search button{
-  width: 32px;
-  height: 33px;
-  padding: 1px;
-  border: none;
-}
+      input {
+        width: 136px;
+        height: 30px;
+        padding: 1px 1px 1px 5px;
+        border: none;
+      }
 
-.mna-menu-user-credentials{
-  margin-top: 15px;
-}
-
-.mna-menu-user-credentials span {
-  display: block;
-  margin-bottom: 7px;
+      button {
+        width: 32px;
+        height: 33px;
+        padding: 1px;
+        border: none;
+      }
+    }
+  }
 }

@@ -14,11 +14,22 @@ html, button, input, select, textarea,
   font-family: Arvo, sans-serif;
 }
 
+@mixin mna-border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
 .mna-section-header {
-  font-family: Bevan, serif;
-  font-weight: 900;
-  font-size: 3rem;
-  margin-top: 0;
-  margin-bottom: 10px;
+  font: {
+    family: Bevan, serif;
+    weight: 900;
+    size: 3rem;
+  }
+  margin: {
+    top: 0;
+    bottom: 10px;
+  }
   text-align: right;
 }

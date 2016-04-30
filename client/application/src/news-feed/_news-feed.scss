@@ -1,8 +1,11 @@
-.mna-newsfeed-site {
-  display: inline-block;
-}
+.mna-newsfeed {
 
-.mna-newsfeed-pub-date {
-  display: inline-block;
-  float: right;
+  &-site {
+    display: inline-block;
+  }
+
+  &-pub-date {
+    display: inline-block;
+    float: right;
+  }
 }

@@ -1,12 +1,14 @@
-.mna-auth h1 {
-  text-align: center;
-}
+.mna-auth {
+  h1 {
+    text-align: center;
+  }
 
-.mna-auth-switch-controls {
-  text-align: center;
-}
+  &-switch-controls {
+    text-align: center;
 
-.mna-auth-switch-controls button {
-  text-align: center;
-  width: 49%;
+    button {
+      text-align: center;
+      width: 49%;
+    }
+  }
 }
